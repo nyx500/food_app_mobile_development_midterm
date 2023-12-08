@@ -10,15 +10,26 @@ import { Cell, Section, TableView } from 'react-native-tableview-simple';
 
 // Restaurants/Home Screen
 function HomeScreen() {
+
+  
+  const HomeScreenCell = (props) => (
+    <Cell
+      {...props}
+      title={"Basic Cell!"}
+      cellStyle="Basic"
+    />
+  );
+
   return (
     <View>
       <ScrollView>
         <TableView>
         <Section 
-          header={"my section"} 
+          header={""} 
           separatorTintColor="#ccc"
           hideSeparator={true}
         >
+          <HomeScreenCell/>
         </Section>
         </TableView>
       </ScrollView>
@@ -37,6 +48,7 @@ function MenuScreen() {
 const Stack = createStackNavigator();
 
 export default function App() {
+
   return (
       <NavigationContainer>
         <Stack.Navigator>
