@@ -6,20 +6,52 @@
 // Photo by <a href="https://unsplash.com/@courtneymcook?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Courtney Cook</a> on <a href="https://unsplash.com/photos/flat-lay-photography-pf-food-on-table-SgHyqMzLOMA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 // Indian curry photo:
 // Photo by <a href="https://unsplash.com/@grimnoire?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">emy</a> on <a href="https://unsplash.com/photos/flat-lay-photography-of-vegetable-soup-on-white-ceramic-cup-XoByiBymX20?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+// Logo attribution:
+// Free Download Owl 3 2 SVG vector file in monocolor and multicolor type for Sketch and Figma from Owl 3 2 Vectors svg vector collection. Owl 3 2 Vectors SVG vector illustration graphic art design format.
+// COLLECTION: Special Days Icooon Mono Vectors
+// LICENSE: PD License
+// AUTHOR: Icooon Mono
+
 
 import { StatusBar } from 'expo-status-bar';
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 // Import Navigation libraries
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 // Import TableView components
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 
-// Screens go here
 
+// Replacing the title with a custom component
+// Attribution: https://reactnavigation.org/docs/headers/
+// Color scheme: #ed3507
+function LogoTitle() {
+  return (
+      <Image
+            style={styles.logo}
+            source={require("./images/owl_logo.png")}
+      />
+  );
+}
+
+function Header({navigation, screenTitle}) {
+  return (
+    <View style={styles.headerView}> 
+    <LogoTitle />
+    <Text style={styles.headerTextLogo}>
+        FoodWol: 
+      </Text>
+      <Text style={styles.headerTextContent}>
+        {screenTitle}
+      </Text>
+    </View>
+  )
+}
+
+
+// Screens go here
 // Restaurants/Home Screen
 function HomeScreen({ navigation }) {
-
 
   const HomeScreenCell = (props) => (
     // In your HomescreenCell, use props to set the height to (FIXED) 290px, background colour to transparent and highlight colour to #ccc.
@@ -62,6 +94,7 @@ function HomeScreen({ navigation }) {
             header={""}
             separatorTintColor="#ccc"
             hideSeparator={true}
+            hideSurroundingSeparators={true}
           >
             <HomeScreenCell
               title={"Gaia's Garden"}
@@ -71,7 +104,8 @@ function HomeScreen({ navigation }) {
               action={() => {
                 navigation.navigate("Menu",
                   // Pass "items" object in as a route parameter
-                  {
+                  { 
+                    restaurantName: "Gaia's Garden",
                     // "items" contains an array containing Sections for categories of food and drink
                     items: [
                       // Each object in the array stores a food-subcategory
@@ -141,7 +175,8 @@ function HomeScreen({ navigation }) {
               action={() => {
                 navigation.navigate("Menu",
                   // Pass "items" object in as a route parameter
-                  {
+                  { 
+                    restaurantName: "Joe's Gelato",
                     // "items" contains an array containing Sections for categories of food and drink
                     items: [
                       // Each object in the array stores a food-subcategory
@@ -211,6 +246,7 @@ function HomeScreen({ navigation }) {
               action={() => {
                 navigation.navigate("Menu",
                   {
+                    restaurantName: "Spice Paradise",
                     items: [
                       {
                         "title": "Starters",
@@ -278,6 +314,15 @@ function HomeScreen({ navigation }) {
 function MenuScreen({ route, navigation }) {
   return (
     <View>
+    {/* Add a back button */}
+      <View style={styles.backButtonView}>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={()=>{navigation.goBack()}}
+        >
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+      </View>
       <ScrollView>
         <TableView>
           {
@@ -312,8 +357,22 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Restaurants" component={HomeScreen} />
-        <Stack.Screen name="Menu" component={MenuScreen} />
+        {/* Styling the navigation headers attribution: https://reactnavigation.org/docs/headers/ */}
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={({ navigation }) => ({
+            header: () => <Header navigation={navigation} screenTitle="Restaurants" />,
+          })}
+        />
+        <Stack.Screen 
+          name="Menu" 
+          component={MenuScreen} 
+          options={({ navigation, route }) =>
+           ({
+             header: () => <Header navigation={navigation} screenTitle={route.params.restaurantName} />
+          })} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -326,10 +385,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logo: 
+  {
+    width: "16%",
+    height: "16%",
+    aspectRatio: 1
+  },
+  headerView: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: "10%",
+    paddingHorizontal: "2%"
+  },
+  headerTextLogo: {
+    color: "#ed3507",
+    fontSize: 22,
+    fontWeight: "bold",
+    marginRight: "2.5%"
+  },
+  headerTextContent: {
+    color: "#ed3507",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   restaurantCellContentContainer: {
     // Set height of cell to 290px
     height: 290,
-    alignItems: "stretch"
+    alignItems: "stretch",
   },
   restaurantCellContentView: {
     // Expands the View in CellContent horizontally to fill whole width of screen
@@ -369,5 +452,21 @@ const styles = StyleSheet.create({
   },
   restaurantTaglineText: {
     color: "#858585" // grey tagline
+  },
+  // Menu page
+  backButtonView: {
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingLeft: "4%",
+    marginTop: "4%",
+    marginBottom: "4%"
+  },
+  backButton: {
+    backgroundColor: "#ed3507", borderRadius: 20, paddingHorizontal: "5%", paddingVertical: "1.5%",
+    borderWidth: 3, borderColor: "#f95f39"
+  },
+  backButtonText: { 
+    color: "white",
+    textDecorationLine: "underline" 
   }
 });
