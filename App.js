@@ -99,6 +99,13 @@ function MenuScreen({route, navigation}) {
               <Section 
                 header={item.title}
               >
+               {
+                item.contents.map((product, idx2) => (
+                  <Text key={idx2}>
+                    {product.title}
+                  </Text>
+                )) 
+               }
               </Section>
             ))
           }
