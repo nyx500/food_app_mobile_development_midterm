@@ -403,6 +403,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "9%",
     paddingHorizontal: "2%",
+    paddingVertical: "2%"
   },
   headerTextLogo: {
     color: "#ed3507",
