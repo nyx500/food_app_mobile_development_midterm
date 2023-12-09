@@ -191,6 +191,7 @@ function HomeScreen({ navigation }) {
                           { "title": "Dulce de leche" },
                           { "title": "Hazelnut" },
                           { "title": "Lemon" },
+                          { "title": "Inimitable" },
                           { "title": "Mint" },
                           { "title": "Sicilian orange" },
                           { "title": "Strawberry" },
