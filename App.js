@@ -323,7 +323,7 @@ function MenuScreen({ route, navigation }) {
           onPress={()=>{navigation.goBack()}}
         >
           <Text style={styles.backButtonText}>Back</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> 
       </View>
       <ScrollView>
         <TableView>
@@ -363,10 +363,12 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={({ navigation }) => ({
+          options={
+            ({ navigation }) => ({
             // Use custom components for logo and header (see beginning of this file)
             header: () => <Header navigation={navigation} screenTitle="Restaurants" />,
-          })}
+          })
+        }
         />
         <Stack.Screen 
           name="Menu" 
@@ -399,8 +401,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: "10%",
-    paddingHorizontal: "2%"
+    marginTop: "9%",
+    paddingHorizontal: "2%",
   },
   headerTextLogo: {
     color: "#ed3507",
