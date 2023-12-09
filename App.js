@@ -22,6 +22,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 
 
+// LOGO CUSTOM COMPONENT FOR NAVIGATION HEADER
 // Replacing the title with a custom component
 // Attribution: https://reactnavigation.org/docs/headers/
 // Color scheme: #ed3507
@@ -34,6 +35,7 @@ function LogoTitle() {
   );
 }
 
+// CUSTOM NAVIGATION HEADER CONTAINING LOGO WITH TITLE AS PROP PARAMETER
 function Header({navigation, screenTitle}) {
   return (
     <View style={styles.headerView}> 
@@ -357,11 +359,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* Styling the navigation headers attribution: https://reactnavigation.org/docs/headers/ */}
+        {/* Styling the navigation headers with custom styles attribution: https://reactnavigation.org/docs/headers/ */}
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={({ navigation }) => ({
+            // Use custom components for logo and header (see beginning of this file)
             header: () => <Header navigation={navigation} screenTitle="Restaurants" />,
           })}
         />
@@ -370,6 +373,7 @@ export default function App() {
           component={MenuScreen} 
           options={({ navigation, route }) =>
            ({
+            // Header displays logo followed by restaurant name for the menu page
              header: () => <Header navigation={navigation} screenTitle={route.params.restaurantName} />
           })} 
         />
