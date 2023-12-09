@@ -75,7 +75,55 @@ function HomeScreen({navigation}) {
                     "title":"Gelato",
                     /** Each food-subcategory contains a "contents" property storing an array
                      * of details about separate food items such as "title" */
-                    "contents":[{"title":"Vanilla"}]
+                    "contents":[
+                      {"title": "Chocolate"},
+                      {"title": "Dulce de leche"},
+                      {"title": "Hazelnut"},
+                      {"title": "Lemon"},
+                      {"title": "Mint"},
+                      {"title": "Sicilian orange"},
+                      {"title": "Strawberry"},
+                      {"title":"Vanilla"},
+                      {"title": "Yogurt and cherries"}
+                    ]
+                  },
+                  {
+                    "title": "Special Desserts",
+                    "contents": [
+                      {"title": "Apple pie"},
+                      {"title": "Carrot cake"},
+                      {"title": "Coconut pie"},
+                      {"title": "Crêpes with 2 gelato scoops"},
+                      {"title": "Hazelnut and chocolate torte"},
+                      {"title": "Raspberry cheesecake"},
+                      {"title": "Waffles with 2 gelato scoops"}
+                    ]
+                  },
+                  {
+                    "title": "Coffee",
+                    "contents": [
+                      {"title": "Caffé Americano"},
+                      {"title": "Cappucino"},
+                      {"title": "Caramel Macchiato"},
+                      {"title": "Filter Coffee"},
+                      {"title":"Flat white"},
+                      {"title": "Latte"},
+                      {"title": "Mocha"},
+                    ]
+                  },
+                  {
+                    "title": "Milkshakes",
+                    "contents": [
+                      {"title": "Chocolate"},
+                      {"title": "Dulce de leche"},
+                      {"title": "Hazelnut"},
+                      {"title": "Lemon"},
+                      {"title": "Mint"},
+                      {"title": "Sicilian orange"},
+                      {"title": "Strawberry"},
+                      {"title":"Vanilla"},
+                      {"title": "Yogurt and cherries"}
+                    ]
                   }
                 ]
               });}}
