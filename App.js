@@ -15,7 +15,7 @@ import { Cell, Section, TableView } from 'react-native-tableview-simple';
 // Screens go here
 
 // Restaurants/Home Screen
-function HomeScreen() {
+function HomeScreen({navigation}) {
 
   
   const HomeScreenCell = (props) => (
@@ -46,6 +46,7 @@ function HomeScreen() {
           </Text>
         </View>   
       }
+      onPress={props.action}
     />
   );
 
@@ -54,28 +55,52 @@ function HomeScreen() {
     <View>
       <ScrollView>
         <TableView>
-        <Section 
-          header={""} 
-          separatorTintColor="#ccc"
-          hideSeparator={true}
-        >
-          <HomeScreenCell
-            title = {"Joe's Gelato"}
-            tagline = {"Desert, Ice cream, £££"}
-            eta = "10-30"
-            imgUri = {require("./images/ice_cream_parlor.jpg")}
-          />
-        </Section>
+          <Section 
+            header={""} 
+            separatorTintColor="#ccc"
+            hideSeparator={true}
+          >
+            <HomeScreenCell
+              title = {"Joe's Gelato"}
+              tagline = {"Desert, Ice cream, £££"}
+              eta = "10-30"
+              imgUri = {require("./images/ice_cream_parlor.jpg")}
+              action = {() => {navigation.navigate("Menu", 
+              // Pass "items" object in as a route parameter
+              { 
+                // "items" contains an array containing Sections for categories of food and drink
+                items: [
+                  // Each object in the array stores a food-subcategory
+                  {
+                    "title":"Gelato",
+                    /** Each food-subcategory contains a "contents" property storing an array
+                     * of details about separate food items such as "title" */
+                    "contents":[{"title":"Vanilla"}]
+                  }
+                ]
+              });}}
+            />
+          </Section>
         </TableView>
       </ScrollView>
     </View>
   )
 }
 
-// Menu Screen
-function MenuScreen() {
+// Menu Screen: remember to pass in the route containing the "items" data
+function MenuScreen({route, navigation}) {
   return (
     <View>  
+      <ScrollView>
+        <TableView>
+          {
+            // Inside the TableView iterate through "items", creating a new Section each time.
+            route.params.items.map((item, idx ) => (
+              <Text key={idx}>{idx}: {item.title}</Text>
+            ))
+          }
+        </TableView>
+      </ScrollView>
     </View>
   )
 }
