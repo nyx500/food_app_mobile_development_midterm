@@ -97,13 +97,16 @@ function MenuScreen({route, navigation}) {
             // Inside the TableView iterate through "items", creating a new Section each time.
             route.params.items.map((item, idx ) => (
               <Section 
+                key = {idx}
                 header={item.title}
               >
                {
                 item.contents.map((product, idx2) => (
-                  <Text key={idx2}>
-                    {product.title}
-                  </Text>
+                  <Cell
+                    key={idx2}
+                    cellStyle="Basic"
+                    title = {product.title}
+                  />
                 )) 
                }
               </Section>
