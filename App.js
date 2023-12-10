@@ -174,33 +174,84 @@ function HomeScreen({ navigation }) {
                       {
                         "title": "Sides",
                         "contents": [
-                          { "title": "Big load fries", "price": 3.99 },
-                          { "title": "Crispy vegan chicken nuggets", "price": 6.99 },
-                          { "title": "Onion rings", "price": 3.50 },
-                          { "title": "Sweet potato wedges", "price": 4.99 },
-                          { "title": "Waffle fries", "price": 3.99 },
-                          { "title": "Vegan slaw", "price": 3.50 },
+                          { 
+                            "title": "Big load fries",
+                            "price": 3.99 
+                          },
+                          { 
+                            "title": "Crispy vegan chicken nuggets",
+                            "price": 6.99 
+                          },
+                          { 
+                            "title": "Onion rings",
+                            "price": 3.50 
+                          },
+                          { 
+                            "title": "Sweet potato wedges",
+                            "price": 4.99 
+                          },
+                          { 
+                            "title": "Waffle fries",
+                            "price": 3.99 
+                          },
+                          { 
+                            "title": "Vegan slaw",
+                            "price": 3.50 
+                          },
                         ]
                       },
                       {
                         "title": "Sweets",
                         "contents": [
-                          { "title": "Banana muffin", "price": 4.50 },
-                          { "title": "Carrot cake", "price": 5.25 },
-                          { "title": "Coconut and passion fruit sticky rice", "price": 6.25 },
-                          { "title": "Mango chia bowl", "price": 6.00 },
-                          { "title": "Peach pie", "price": 4.99 },
-                          { "title": "Vegan chocolate fondant with sticky fudge", "price": 4.50 }
+                          { 
+                            "title": "Banana muffin",
+                            "price": 4.50 
+                          },
+                          { 
+                            "title": "Carrot cake",
+                            "price": 5.25 
+                          },
+                          { 
+                            "title": "Coconut and passion fruit sticky rice",
+                            "price": 6.25 
+                          },
+                          { 
+                            "title": "Mango chia bowl",
+                            "price": 6.00 
+                          },
+                          { 
+                            "title": "Peach pie",
+                            "price": 4.99 
+                          },
+                          { 
+                            "title": "Vegan chocolate fondant with sticky fudge",
+                            "price": 4.50 
+                          }
                         ]
                       },
                       {
                         "title": "Drinks",
                         "contents": [
-                          { "title": "Berry smoothie", "price": 3.99 },
-                          { "title": "Fresh-squeezed orange juice", "price": 2.99 },
-                          { "title": "Kale and spinach smoothie", "price": 4.99 },
-                          { "title": "Mango smoothie", "price": 3.99 },
-                          { "title": "Sparkling water", "price": 2.50 },
+                          {
+                            "title": "Berry smoothie",
+                            "price": 3.99
+                          },
+                          {
+                            "title": "Fresh-squeezed orange juice",
+                            "price": 2.99
+                          },
+                          {
+                            "title": "Kale and spinach smoothie",
+                            "price": 4.99
+                          },
+                          { 
+                            "title": "Mango smoothie",
+                            "price": 3.99 
+                          },
+                          { 
+                            "title": "Sparkling water",
+                            "price": 2.50 
+                          },
                         ]
                       }
                     ]
@@ -225,55 +276,156 @@ function HomeScreen({ navigation }) {
                         /** Each food-subcategory contains a "contents" property storing an array
                          * of details about separate food items such as "title" */
                         "contents": [
-                          { "title": "Chocolate", "price": 1.50 },
-                          { "title": "Dulce de leche", "price": 2.00 },
-                          { "title": "Hazelnut", "price": 1.50 },
-                          { "title": "Lemon", "price": 1.50 },
-                          { "title": "Inimitable", "price": 1.75 },
-                          { "title": "Mint", "price": 1.50 },
-                          { "title": "Sicilian orange", "price": 2.00 },
-                          { "title": "Strawberry", "price": 1.50 },
-                          { "title": "Vanilla", "price": 1.50 },
-                          { "title": "Yogurt and cherries", "price": 2.00 }
+                          { 
+                            "title": "Chocolate",
+                            "price": 1.50 
+                          },
+                          { 
+                            "title": "Dulce de leche",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Hazelnut",
+                            "price": 1.50 
+                          },
+                          { 
+                            "title": "Lemon",
+                            "price": 1.50 
+                          },
+                          { 
+                            "title": "Inimitable",
+                            "price": 1.75 
+                          },
+                          { 
+                            "title": "Mint",
+                            "price": 1.50 
+                          },
+                          { 
+                            "title": "Sicilian orange",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Strawberry",
+                            "price": 1.50 
+                          },
+                          { 
+                            "title": "Vanilla",
+                            "price": 1.50 
+                          },
+                          { 
+                            "title": "Yogurt and cherries",
+                            "price": 2.00 
+                          }
                         ]
                       },
                       {
                         "title": "Special Desserts",
                         "contents": [
-                          { "title": "Apple pie", "price": 4.00 },
-                          { "title": "Carrot cake", "price": 4.50 },
-                          { "title": "Coconut pie", "price": 3.00 },
-                          { "title": "Crêpes with 2 gelato scoops", "price": 4.50 },
-                          { "title": "Hazelnut and chocolate torte", "price": 4.99 },
-                          { "title": "Raspberry cheesecake", "price": 4.00 },
-                          { "title": "Waffles with 2 gelato scoops", "price": 3.50 }
+                          { 
+                            "title": "Apple pie",
+                            "price": 4.00 
+                          },
+                          { 
+                            "title": "Carrot cake",
+                            "price": 4.50 
+                          },
+                          { 
+                            "title": "Coconut pie",
+                            "price": 3.00 
+                          },
+                          { 
+                            "title": "Crêpes with 2 gelato scoops",
+                            "price": 4.50 
+                          },
+                          { 
+                            "title": "Hazelnut and chocolate torte",
+                            "price": 4.99
+                           },
+                          {
+                            "title": "Raspberry cheesecake",
+                            "price": 4.00 
+                          },
+                          { 
+                            "title": "Waffles with 2 gelato scoops",
+                            "price": 3.50 
+                          }
                         ]
                       },
                       {
                         "title": "Coffee",
                         "contents": [
-                          { "title": "Caffé Americano", "price": 2.00 },
-                          { "title": "Cappucino", "price": 3.75 },
-                          { "title": "Caramel Macchiato", "price": 2.95 },
-                          { "title": "Filter Coffee", "price": 1.50 },
-                          { "title": "Flat white", "price": 3.00 },
-                          { "title": "Latte", "price": 3.00 },
-                          { "title": "Mocha", "price": 4.95 },
+                          { 
+                            "title": "Caffé Americano",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Cappucino",
+                            "price": 3.75 
+                          },
+                          { "title": "Caramel Macchiato",
+                            "price": 2.95 
+                          },
+                          { 
+                            "title": "Filter Coffee",
+                            "price": 1.50 
+                          },
+                          { 
+                            "title": "Flat white",
+                            "price": 3.00 
+                          },
+                          { 
+                            "title": "Latte",
+                            "price": 3.00
+                          },
+                          { 
+                            "title": "Mocha",
+                            "price": 4.95 
+                          },
                         ]
                       },
                       {
                         "title": "Milkshakes",
                         "contents": [
-                          { "title": "Chocolate", "price": 2.00 },
-                          { "title": "Dulce de leche", "price": 2.50 },
-                          { "title": "Hazelnut", "price": 2.00 },
-                          { "title": "Lemon", "price": 2.00 },
-                          { "title": "Inimitable", "price": 2.25 },
-                          { "title": "Mint", "price": 2.00 },
-                          { "title": "Sicilian orange", "price": 2.50 },
-                          { "title": "Strawberry", "price": 2.00 },
-                          { "title": "Vanilla", "price": 2.00 },
-                          { "title": "Yogurt and cherries", "price": 2.50 }
+                          { 
+                            "title": "Chocolate",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Dulce de leche",
+                            "price": 2.50 
+                          },
+                          { 
+                            "title": "Hazelnut",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Lemon",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Inimitable",
+                            "price": 2.25 
+                          },
+                          { 
+                            "title": "Mint",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Sicilian orange",
+                            "price": 2.50 
+                          },
+                          { 
+                            "title": "Strawberry",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Vanilla",
+                            "price": 2.00 
+                          },
+                          { 
+                            "title": "Yogurt and cherries",
+                            "price": 2.50 
+                          }
                         ]
                       }
                     ]
