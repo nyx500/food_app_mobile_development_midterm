@@ -116,53 +116,91 @@ function HomeScreen({ navigation }) {
                         /** Each food-subcategory contains a "contents" property storing an array
                          * of details about separate food items such as "title" */
                         "contents": [
-                          { "title": "Caesar Salad: veggie chicken fillets and cashew cheese" },
-                          { "title": "California Salad: avocado, tomatoes, vegan bacon and corn-on-the-cob" },
-                          { "title": "Winter Salad: sweet potatoes, brussel sprouts and walnuts" },
-                          { "title": "Summer Refresher: blueberry, vegan feta and baby spinach" },
-                          { "title": "Thai Salad: mango, tofu and peanut salad" }
+                          { 
+                            "title": "Caesar Salad",
+                            "subtitle": "Veggie chicken fillets and cashew cheese",
+                            "price": 10.99
+                          },
+                          { 
+                            "title": "California Salad",
+                            "subtitle": "Avocado, tomatoes, vegan bacon and corn-on-the-cob",
+                            "price": 8.99
+                          },
+                          { 
+                            "title": "Winter Salad",
+                            "subtitle": "Sweet potatoes, brussel sprouts and walnuts",
+                            "price":  8.99
+                          },
+                          { "title": "Summer Refresher",
+                            "subtitle": "Blueberry, vegan feta and baby spinach",
+                            "price":  7.99
+                           },
+                          { "title": "Thai Salad",
+                            "subtitle": "Mango, tofu and peanut salad",
+                            "price": 9.99
+                          }
                         ]
                       },
                       {
                         "title": "Vegan Burgers",
                         "contents": [
-                          { "title": "California Dreaming: vegan beef patty with spicy guacamole" },
-                          { "title": "Marine Dream: vegan fish patty with gherkins and seaweed mayo" },
-                          { "title": "Smokehouse Supreme: vegan beef patty with barbecue sauce and onion rings" },
-                          { "title": "The CSB: faux chicken with spicy red cabbage slaw" },
-                          { "title": "The OG: vegan beef patty with bacon and vegan cheese" }
+                          { 
+                            "title": "California Dreaming",
+                            "subtitle": "Veggie beef patty with spicy guacamole",
+                            "price": 13.99
+                           },
+                          { 
+                            "title": "Marine Dream",
+                            "subtitle": "Veggie fish patty with gherkins and seaweed mayo",
+                            "price": 12.99
+                           },
+                          { 
+                            "title": "Smokehouse Supreme",
+                            "subtitle": "Vegan beef patty with barbecue sauce and onion rings",
+                            "price": 14.99
+                           },
+                          { 
+                            "title": "The CSB",
+                            "subtitle": "Faux chicken with spicy red cabbage slaw",
+                            "price": 12.99
+                          },
+                          { 
+                            "title": "The OG",
+                            "subtitle": "Vegan beef patty with bacon and vegan cheese",
+                            "price": 10.99
+                          }
                         ]
                       },
                       {
                         "title": "Sides",
                         "contents": [
-                          { "title": "Big load fries" },
-                          { "title": "Crispy vegan chicken nuggets" },
-                          { "title": "Onion rings" },
-                          { "title": "Sweet potato wedges" },
-                          { "title": "Waffle fries" },
-                          { "title": "Vegan slaw" },
+                          { "title": "Big load fries", "price": 3.99 },
+                          { "title": "Crispy vegan chicken nuggets", "price": 6.99 },
+                          { "title": "Onion rings", "price": 3.50 },
+                          { "title": "Sweet potato wedges", "price": 4.99 },
+                          { "title": "Waffle fries", "price": 3.99 },
+                          { "title": "Vegan slaw", "price": 3.50 },
                         ]
                       },
                       {
                         "title": "Sweets",
                         "contents": [
-                          { "title": "Banana muffin" },
-                          { "title": "Carrot cake" },
-                          { "title": "Coconut and passion fruit sticky rice" },
-                          { "title": "Mango chia bowl" },
-                          { "title": "Peach pie" },
-                          { "title": "Vegan chocolate fondant with sticky fudge" }
+                          { "title": "Banana muffin", "price": 4.50 },
+                          { "title": "Carrot cake", "price": 5.25 },
+                          { "title": "Coconut and passion fruit sticky rice", "price": 6.25 },
+                          { "title": "Mango chia bowl", "price": 6.00 },
+                          { "title": "Peach pie", "price": 4.99 },
+                          { "title": "Vegan chocolate fondant with sticky fudge", "price": 4.50 }
                         ]
                       },
                       {
                         "title": "Drinks",
                         "contents": [
-                          { "title": "Berry smoothie" },
-                          { "title": "Fresh-squeezed orange juice" },
-                          { "title": "Kale and spinach smoothie" },
-                          { "title": "Mango smoothie" },
-                          { "title": "Sparkling water" },
+                          { "title": "Berry smoothie", "price": 3.99 },
+                          { "title": "Fresh-squeezed orange juice", "price": 2.99 },
+                          { "title": "Kale and spinach smoothie", "price": 4.99 },
+                          { "title": "Mango smoothie", "price": 3.99 },
+                          { "title": "Sparkling water", "price": 2.50 },
                         ]
                       }
                     ]
@@ -315,6 +353,33 @@ function HomeScreen({ navigation }) {
 
 // Menu Screen: remember to pass in the route containing the "items" data
 function MenuScreen({ route, navigation }) {
+
+  // A custom cell component which permits having a subtitle AND a right-detail for the price
+  // In react-native-tableview-simple, you are restricted to only having one "detail", which is
+  // unsuitable for having a menu-item with both a subtitle and a price on the right-hand side!
+  const CustomCellWithSubtitleAndRightDetail = (props) => (
+    <Cell
+      {...props}
+      cellContentView={
+        <View style={styles.subtitleCellRowView}>
+          <View style={styles.subtitleCellTitleAndSubtitle}>
+            <Text>
+              {props.productTitle}
+            </Text>
+            <Text style={styles.menuSubtitleCellSubtitle}>
+              {props.productSubtitle}
+            </Text>
+          </View>
+          <View style={styles.menuSubtitleCellPriceContainer}>
+            <Text style={styles.menuSubtitleCellPrice}>
+              £{props.productPrice}
+            </Text>
+          </View>
+        </View>
+      }
+    />
+  );
+
   return (
     <View>
     {/* Add a back button */}
@@ -336,13 +401,29 @@ function MenuScreen({ route, navigation }) {
                 header={item.title}
               >
                 {
-                  item.contents.map((product, idx2) => (
-                    <Cell
-                      key={idx2}
-                      cellStyle="Basic"
-                      title={product.title}
-                    />
-                  ))
+                  item.contents.map((product, idx2) => {
+                    if (product.subtitle) {
+                      return (
+                        <CustomCellWithSubtitleAndRightDetail
+                          key={idx2}
+                          productTitle={product.title}
+                          productSubtitle={product.subtitle}
+                          // Makes sure that 0s are displayed after price up to 2 decimal places
+                          productPrice={product.price.toFixed(2)}
+                        />  
+                      );
+                    } else {
+                      return (
+                        <Cell
+                          key={idx2}
+                          cellStyle="RightDetail"
+                          title={product.title}
+                          detail={`£${product.price.toFixed(2)}`}
+                          detailTextStyle={styles.menuSubtitleCellPrice}
+                        />
+                      );
+                    }
+                  })
                 }
               </Section>
             ))
@@ -476,5 +557,28 @@ const styles = StyleSheet.create({
   backButtonText: { 
     color: "white",
     textDecorationLine: "underline" 
+  },
+  subtitleCellRowView: {
+    flexDirection: "row",
+    // Stretches View across the whole cell!
+    flex: 1,
+    justifyContent: "space-between"
+  },
+  subtitleCellTitleAndSubtitle: {
+    alignSelf: "flex-start"
+  },
+  menuSubtitleCellSubtitle: {
+    fontSize: 12,
+    color: "#808080"
+  },
+  // Position the price in the custom-menu cell at the right of the custom cell View
+  menuSubtitleCellPriceContainer: {
+    alignSelf: "center",
+    position: "absolute",
+    right: 0
+  },
+  menuSubtitleCellPrice: {
+    fontSize: 14,
+    color: "darkgrey"
   }
 });
