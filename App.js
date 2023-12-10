@@ -221,58 +221,59 @@ function HomeScreen({ navigation }) {
                     items: [
                       // Each object in the array stores a food-subcategory
                       {
-                        "title": "Gelato",
+                        "title": "Gelato: Price per scoop!",
                         /** Each food-subcategory contains a "contents" property storing an array
                          * of details about separate food items such as "title" */
                         "contents": [
-                          { "title": "Chocolate" },
-                          { "title": "Dulce de leche" },
-                          { "title": "Hazelnut" },
-                          { "title": "Lemon" },
-                          { "title": "Inimitable" },
-                          { "title": "Mint" },
-                          { "title": "Sicilian orange" },
-                          { "title": "Strawberry" },
-                          { "title": "Vanilla" },
-                          { "title": "Yogurt and cherries" }
+                          { "title": "Chocolate", "price": 1.50 },
+                          { "title": "Dulce de leche", "price": 2.00 },
+                          { "title": "Hazelnut", "price": 1.50 },
+                          { "title": "Lemon", "price": 1.50 },
+                          { "title": "Inimitable", "price": 1.75 },
+                          { "title": "Mint", "price": 1.50 },
+                          { "title": "Sicilian orange", "price": 2.00 },
+                          { "title": "Strawberry", "price": 1.50 },
+                          { "title": "Vanilla", "price": 1.50 },
+                          { "title": "Yogurt and cherries", "price": 2.00 }
                         ]
                       },
                       {
                         "title": "Special Desserts",
                         "contents": [
-                          { "title": "Apple pie" },
-                          { "title": "Carrot cake" },
-                          { "title": "Coconut pie" },
-                          { "title": "Crêpes with 2 gelato scoops" },
-                          { "title": "Hazelnut and chocolate torte" },
-                          { "title": "Raspberry cheesecake" },
-                          { "title": "Waffles with 2 gelato scoops" }
+                          { "title": "Apple pie", "price": 4.00 },
+                          { "title": "Carrot cake", "price": 4.50 },
+                          { "title": "Coconut pie", "price": 3.00 },
+                          { "title": "Crêpes with 2 gelato scoops", "price": 4.50 },
+                          { "title": "Hazelnut and chocolate torte", "price": 4.99 },
+                          { "title": "Raspberry cheesecake", "price": 4.00 },
+                          { "title": "Waffles with 2 gelato scoops", "price": 3.50 }
                         ]
                       },
                       {
                         "title": "Coffee",
                         "contents": [
-                          { "title": "Caffé Americano" },
-                          { "title": "Cappucino" },
-                          { "title": "Caramel Macchiato" },
-                          { "title": "Filter Coffee" },
-                          { "title": "Flat white" },
-                          { "title": "Latte" },
-                          { "title": "Mocha" },
+                          { "title": "Caffé Americano", "price": 2.00 },
+                          { "title": "Cappucino", "price": 3.75 },
+                          { "title": "Caramel Macchiato", "price": 2.95 },
+                          { "title": "Filter Coffee", "price": 1.50 },
+                          { "title": "Flat white", "price": 3.00 },
+                          { "title": "Latte", "price": 3.00 },
+                          { "title": "Mocha", "price": 4.95 },
                         ]
                       },
                       {
                         "title": "Milkshakes",
                         "contents": [
-                          { "title": "Chocolate" },
-                          { "title": "Dulce de leche" },
-                          { "title": "Hazelnut" },
-                          { "title": "Lemon" },
-                          { "title": "Mint" },
-                          { "title": "Sicilian orange" },
-                          { "title": "Strawberry" },
-                          { "title": "Vanilla" },
-                          { "title": "Yogurt and cherries" }
+                          { "title": "Chocolate", "price": 2.00 },
+                          { "title": "Dulce de leche", "price": 2.50 },
+                          { "title": "Hazelnut", "price": 2.00 },
+                          { "title": "Lemon", "price": 2.00 },
+                          { "title": "Inimitable", "price": 2.25 },
+                          { "title": "Mint", "price": 2.00 },
+                          { "title": "Sicilian orange", "price": 2.50 },
+                          { "title": "Strawberry", "price": 2.00 },
+                          { "title": "Vanilla", "price": 2.00 },
+                          { "title": "Yogurt and cherries", "price": 2.50 }
                         ]
                       }
                     ]
@@ -290,54 +291,56 @@ function HomeScreen({ navigation }) {
                     restaurantName: "Spice Paradise",
                     items: [
                       {
-                        "title": "Starters",
+                        "title": "Starters (3x item)",
                         "contents": [
-                          { "title": "Chicken samosas" },
-                          { "title": "Lentil bites" },
-                          { "title": "Onion bhajis" },
-                          { "title": "Potato paratha" },
-                          { "title": "Vegetarian pakoras" },
-                          { "title": "Vegetarian samosas" }
+                          { "title": "Chicken samosas", "price": 4.99 },
+                          { "title": "Lentil bites", "price": 2.99 },
+                          { "title": "Onion bhajis", "price": 2.99 },
+                          { "title": "Potato paratha", "price": 2.99 },
+                          { "title": "Vegetarian pakoras", "price": 3.99 },
+                          { "title": "Vegetarian samosas", "price": 3.99 }
                         ]
                       },
                       {
-                        "title": "Curries",
+                        "title": "Mains",
                         "contents": [
-                          { "title": "Chicken korma" },
-                          { "title": "Chicken tikka masala" },
-                          { "title": "Chicken jalfrezi" },
-                          { "title": "Chicken vindaloo" },
-                          { "title": "Chickpea chana masala" },
-                          { "title": "Fish coconut curry" },
-                          { "title": "Lamb biryani" },
-                          { "title": "Lamb madras" },
-                          { "title": "Lentil dahl" },
-                          { "title": "Prawn jalfrezi" },
-                          { "title": "Vegetarian balti" },
-                          { "title": "Vegetarian biryani" }
+                          { "title": "Chef's Special Chicken", "subtitle": "Chicken curry with tropical fruits", "price": 10.99 },
+                          { "title": "Chicken korma", "subtitle":"Sauce made from cream and ground nuts", "price": 10.99 },
+                          { "title": "Chicken tikka masala", "subtitle":"Creamy tomato sauce", "price": 9.99 },
+                          { "title": "Chicken jalfrezi", "subtitle":"Pepper and tomato sauce", "price": 9.99 },
+                          { "title": "Chicken vindaloo", "subtitle": "Vinegary, very spicy sauce", "price": 9.99 },
+                          { "title": "Chickpea chana masala", "subtitle": "Medium-spicy tomato based sauce", "price": 8.99 },
+                          { "title": "Fish coconut curry", "subtitle":"Cod in creamy coconut sauce", "price": 12.99 },
+                          { "title": "Lamb biryani", "subtitle": "Aromatic rice with succulent lamb", "price": 12.99 },
+                          { "title": "Lamb madras", "subtitle": "Rich and aromatic spice blend", "price": 12.99 },
+                          { "title": "Lentil dahl", "subtitle": "Spicy mustard and coriander sauce", "price": 8.99 },
+                          {"title": "Saag aloo", "subtitle": "Dry spinach curry with potatoes", "price": 6.99},
+                          { "title": "Prawn jalfrezi", "subtitle":"Pepper and tomato sauce", "price": 12.99 },
+                          { "title": "Vegetarian balti", "subtitle": "Spicy vegetable stir-fry", "price": 7.99 },
+                          { "title": "Vegetarian biryani", "subtitle": "Aromatic rice with cauliflower and peas", "price": 7.99 }
                         ]
                       },
                       {
                         "title": "Sides",
                         "contents": [
-                          { "title": "Coconut rice" },
-                          { "title": "Pilau rice" },
-                          { "title": "Plain rice" },
-                          { "title": "Garlic naan bread" },
-                          { "title": "Plain naan bread" },
-                          { "title": "Cucumber raita" },
-                          { "title": "Selection of pickles" },
-                          { "title": "Poppadums" },
+                          { "title": "Coconut rice", "price": 2.99 },
+                          { "title": "Pilau rice", "price": 2.99 },
+                          { "title": "Plain rice", "price": 1.99 },
+                          { "title": "Garlic naan bread", "price": 2.99 },
+                          { "title": "Plain naan bread", "price": 2.99 },
+                          { "title": "Cucumber raita", "price": 1.99 },
+                          { "title": "Selection of pickles", "price": 1.00 },
+                          { "title": "Poppadums", "price": 1.00 },
                         ]
                       },
                       {
                         "title": "Drinks",
                         "contents": [
-                          { "title": "Chai masala" },
-                          { "title": "Home-made lemonade" },
-                          { "title": "Salty lassi" },
-                          { "title": "Mango lassi" },
-                          { "title": "Sparkling water" }
+                          { "title": "Chai masala", "price": 2.50 },
+                          { "title": "Home-made lemonade", "price": 1.50 },
+                          { "title": "Salty lassi", "price": 3.50 },
+                          { "title": "Mango lassi", "price": 3.50  },
+                          { "title": "Sparkling water", "price": 1.50  }
                         ]
                       }
                     ]
@@ -399,6 +402,8 @@ function MenuScreen({ route, navigation }) {
               <Section
                 key={idx}
                 header={item.title}
+                headerTextColor="#ed3507"
+                headerTextStyle={styles.menuSectionHeaderTextStyle}
               >
                 {
                   item.contents.map((product, idx2) => {
@@ -557,6 +562,9 @@ const styles = StyleSheet.create({
   backButtonText: { 
     color: "white",
     textDecorationLine: "underline" 
+  },
+  menuSectionHeaderTextStyle: {
+    fontSize: 16
   },
   subtitleCellRowView: {
     flexDirection: "row",
