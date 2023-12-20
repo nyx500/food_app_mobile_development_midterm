@@ -12,8 +12,10 @@
 // LICENSE: PD License
 // AUTHOR: Icooon Mono
 // Salad: Photo by <a href="https://unsplash.com/@annapelzer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Anna Pelzer</a> on <a href="https://unsplash.com/photos/bowl-of-vegetable-salads-IGfIGP5ONV0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+// Shopping cart: <a href="https://www.flaticon.com/free-icons/smart-cart" title="smart cart icons">Smart cart icons created by Freepik - Flaticon</a>
+// React useContext tutorials: https://www.w3schools.com/react/react_usecontext.asp, https://dmitripavlutin.com/react-context-and-usecontext/
 
-
+// 
 
 import { StatusBar } from 'expo-status-bar';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -22,6 +24,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 // Import TableView components
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
+import React, { createContext, useState, useContext } from 'react';
 
 
 // LOGO CUSTOM COMPONENT FOR NAVIGATION HEADER
@@ -37,8 +40,18 @@ function LogoTitle() {
   );
 }
 
+function LogoCart() {
+  return (
+    <Image
+      style={styles.cartLogo}
+      source={require('./images/shopping_cart.png')}
+    />
+  );
+}
+
 // CUSTOM NAVIGATION HEADER CONTAINING LOGO WITH TITLE AS PROP PARAMETER
 function Header({ navigation, screenTitle }) {
+  const { priceInBasket, clearBasket } = useContext(ShoppingCartContext);
   return (
     <View style={styles.headerView}>
       <LogoTitle />
@@ -48,6 +61,13 @@ function Header({ navigation, screenTitle }) {
       <Text style={styles.headerTextContent}>
         {screenTitle}
       </Text>
+      <View style={styles.cart}>
+        <LogoCart/>
+        <Text style={styles.cartText}>£{priceInBasket.toFixed(2)}</Text>
+        <TouchableOpacity style={styles.clearButton} onPress={()=>{clearBasket()}}>
+          <Text style={styles.clearButtonText}>Clear</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -92,7 +112,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <View>
-      <ScrollView>
+      <ScrollView style={styles.scrollViewHome}>
         <TableView>
           <Section
             header={""}
@@ -721,6 +741,8 @@ function HomeScreen({ navigation }) {
 // Menu Screen: remember to pass in the route containing the "items" data
 function MenuScreen({ route, navigation }) {
 
+  const { priceInBasket, addToBasket, clearBasket } = useContext(ShoppingCartContext);
+
   // A custom cell component which permits having a subtitle AND a right-detail for the price
   // In react-native-tableview-simple, you are restricted to only having one "detail", which is
   // unsuitable for having a menu-item with both a subtitle and a price on the right-hand side!
@@ -728,6 +750,9 @@ function MenuScreen({ route, navigation }) {
     <Cell
       {...props}
       isDisabled={props.instock? false : true}
+      onPress={() => {
+        addToBasket(props.productPrice); // Add the desired amount to the basket
+      }}
       cellContentView={
         <View style={styles.subtitleCellRowView}>
           <View style={styles.subtitleCellTitleAndSubtitle}>
@@ -765,7 +790,7 @@ function MenuScreen({ route, navigation }) {
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollViewMenu}>
         <TableView>
           {
             // Inside the TableView iterate through "items", creating a new Section each time.
@@ -784,7 +809,7 @@ function MenuScreen({ route, navigation }) {
                         productTitle={product.title}
                         productSubtitle={product.subtitle}
                         // Makes sure that 0s are displayed after price up to 2 decimal places
-                        productPrice={product.price.toFixed(2)}
+                        productPrice={product.price}
                         instock = {product.instock}
                       />
                     );
@@ -799,35 +824,51 @@ function MenuScreen({ route, navigation }) {
   )
 }
 
+const ShoppingCartContext = createContext();
 const Stack = createStackNavigator();
 
 export default function App() {
 
+  const [priceInBasket, setPriceInBasket] = useState(0);
+  const addToBasket = (amount) => {
+    setPriceInBasket((prevPrice) => prevPrice + amount);
+  };
+  const clearBasket = () => {
+    setPriceInBasket(0);
+  };
+  const contextValues = {
+    priceInBasket,
+    addToBasket,
+    clearBasket
+  };
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {/* Styling the navigation headers with custom styles attribution: https://reactnavigation.org/docs/headers/ */}
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={
-            ({ navigation }) => ({
-              // Use custom components for logo and header (see beginning of this file)
-              header: () => <Header navigation={navigation} screenTitle="Restaurants" />,
-            })
-          }
-        />
-        <Stack.Screen
-          name="Menu"
-          component={MenuScreen}
-          options={({ navigation, route }) =>
-          ({
-            // Header displays logo followed by restaurant name for the menu page
-            header: () => <Header navigation={navigation} screenTitle={route.params.restaurantName} />
-          })}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ShoppingCartContext.Provider value={contextValues}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {/* Styling the navigation headers with custom styles attribution: https://reactnavigation.org/docs/headers/ */}
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={
+              ({ navigation }) => ({
+                // Use custom components for logo and header (see beginning of this file)
+                header: () => <Header navigation={navigation} screenTitle="Restaurants" priceInBasket={priceInBasket}/>,
+              })
+            }
+          />
+          <Stack.Screen
+            name="Menu"
+            component={MenuScreen}
+            options={({ navigation, route }) =>
+            ({
+              // Header displays logo followed by restaurant name for the menu page
+              header: () => <Header navigation={navigation} screenTitle={route.params.restaurantName} priceInBasket={priceInBasket}/>
+            })}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ShoppingCartContext.Provider>
   );
 }
 
@@ -846,6 +887,7 @@ const styles = StyleSheet.create({
   },
   headerView: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "flex-start",
     alignItems: "center",
     marginTop: "9%",
@@ -863,7 +905,44 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  scrollView: {
+  cart: {
+    position: "absolute",
+    top: "40%",
+    right: "2.5%",
+    justifyContent: "center",
+    alignItems: "center",
+    // This lets the logo be sized in % rather than absolute terms. Parent of the logo needs real dimensions for % to be used
+    // Using a blue border to highlight this TouchableOpacity's size helps with this
+    width: "17%",
+    height: "100%",
+  },
+  cartLogo:
+  {
+    width: "60%",
+    height: "60%",
+    aspectRatio: 1
+  },
+  cartText: {
+    fontWeight: "bold",
+    marginLeft: "7%",
+    color: "#ed3507",
+  },
+  clearButton: {
+    marginLeft: "7%",
+    marginTop: "16%",
+    marginBottom: "5%",
+    backgroundColor: "#bc3e06",
+    borderRadius: 8,
+    paddingVertical: "8%",
+    paddingHorizontal: "12%"
+  },
+  clearButtonText: {
+    color: "white",
+  },
+  scrollViewHome: {
+    marginTop: "8%"
+  },
+  scrollViewMenu: {
     marginBottom: "18%"
   },
   restaurantCellContentContainer: {
