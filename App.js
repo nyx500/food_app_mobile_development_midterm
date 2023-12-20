@@ -11,6 +11,8 @@
 // COLLECTION: Special Days Icooon Mono Vectors
 // LICENSE: PD License
 // AUTHOR: Icooon Mono
+// Salad: Photo by <a href="https://unsplash.com/@annapelzer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Anna Pelzer</a> on <a href="https://unsplash.com/photos/bowl-of-vegetable-salads-IGfIGP5ONV0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
 
 
 import { StatusBar } from 'expo-status-bar';
@@ -119,27 +121,32 @@ function HomeScreen({ navigation }) {
                           {
                             "title": "Caesar Salad",
                             "subtitle": "Veggie chicken fillets and cashew cheese",
-                            "price": 10.99
+                            "price": 10.99,
+                            "instock": false
                           },
                           {
                             "title": "California Salad",
-                            "subtitle": "Avocado, tomatoes, vegan bacon and corn-on-the-cob",
-                            "price": 8.99
+                            "subtitle": "Avocado, corn, veggie bacon",
+                            "price": 8.99,
+                            "instock": true
                           },
                           {
                             "title": "Winter Salad",
                             "subtitle": "Sweet potatoes, brussel sprouts and walnuts",
-                            "price": 8.99
+                            "price": 8.99,
+                            "instock": true
                           },
                           {
                             "title": "Summer Refresher",
                             "subtitle": "Blueberry, vegan feta and baby spinach",
-                            "price": 7.99
+                            "price": 7.99,
+                            "instock": false
                           },
                           {
                             "title": "Thai Salad",
                             "subtitle": "Mango, tofu and peanut salad",
-                            "price": 9.99
+                            "price": 9.99,
+                            "instock": true
                           }
                         ]
                       },
@@ -149,27 +156,32 @@ function HomeScreen({ navigation }) {
                           {
                             "title": "California Dreaming",
                             "subtitle": "Veggie beef patty with spicy guacamole",
-                            "price": 13.99
+                            "price": 13.99,
+                            "instock": true
                           },
                           {
                             "title": "Marine Dream",
                             "subtitle": "Veggie fish patty with gherkins and seaweed mayo",
-                            "price": 12.99
+                            "price": 12.99,
+                            "instock": true
                           },
                           {
                             "title": "Smokehouse Supreme",
                             "subtitle": "Vegan beef patty with barbecue sauce and onion rings",
-                            "price": 14.99
+                            "price": 14.99,
+                            "instock": true
                           },
                           {
                             "title": "The CSB",
                             "subtitle": "Faux chicken with spicy red cabbage slaw",
-                            "price": 12.99
+                            "price": 12.99,
+                            "instock": false
                           },
                           {
                             "title": "The OG",
                             "subtitle": "Vegan beef patty with bacon and vegan cheese",
-                            "price": 10.99
+                            "price": 10.99,
+                            "instock": true
                           }
                         ]
                       },
@@ -178,27 +190,33 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Big load fries",
-                            "price": 3.99
+                            "price": 3.99,
+                            "instock": true
                           },
                           {
                             "title": "Crispy vegan chicken nuggets",
-                            "price": 6.99
+                            "price": 6.99,
+                            "instock": true
                           },
                           {
                             "title": "Onion rings",
-                            "price": 3.50
+                            "price": 3.50,
+                            "instock": true
                           },
                           {
                             "title": "Sweet potato wedges",
-                            "price": 4.99
+                            "price": 4.99,
+                            "instock": true
                           },
                           {
                             "title": "Waffle fries",
-                            "price": 3.99
+                            "price": 3.99,
+                            "instock": true
                           },
                           {
                             "title": "Vegan slaw",
-                            "price": 3.50
+                            "price": 3.50,
+                            "instock": true
                           },
                         ]
                       },
@@ -207,27 +225,33 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Banana muffin",
-                            "price": 4.50
+                            "price": 4.50,
+                            "instock": false
                           },
                           {
                             "title": "Carrot cake",
-                            "price": 5.25
+                            "price": 5.25,
+                            "instock": true
                           },
                           {
                             "title": "Coconut and passion fruit sticky rice",
-                            "price": 6.25
+                            "price": 6.25,
+                            "instock": true
                           },
                           {
                             "title": "Mango chia bowl",
-                            "price": 6.00
+                            "price": 6.00,
+                            "instock": false
                           },
                           {
                             "title": "Peach pie",
-                            "price": 4.99
+                            "price": 4.99,
+                            "instock": true
                           },
                           {
                             "title": "Vegan chocolate fondant with sticky fudge",
-                            "price": 4.50
+                            "price": 4.50,
+                            "instock": true
                           }
                         ]
                       },
@@ -236,23 +260,28 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Berry smoothie",
-                            "price": 3.99
+                            "price": 3.99,
+                            "instock": true
                           },
                           {
                             "title": "Fresh-squeezed orange juice",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Kale and spinach smoothie",
-                            "price": 4.99
+                            "price": 4.99,
+                            "instock": true
                           },
                           {
                             "title": "Mango smoothie",
-                            "price": 3.99
+                            "price": 3.99,
+                            "instock": true
                           },
                           {
                             "title": "Sparkling water",
-                            "price": 2.50
+                            "price": 2.50,
+                            "instock": true
                           },
                         ]
                       }
@@ -280,43 +309,53 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Chocolate",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Dulce de leche",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Hazelnut",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Lemon",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Inimitable",
-                            "price": 1.75
+                            "price": 1.75,
+                            "instock": true
                           },
                           {
                             "title": "Mint",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Sicilian orange",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Strawberry",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Vanilla",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Yogurt and cherries",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           }
                         ]
                       },
@@ -325,31 +364,38 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Apple pie",
-                            "price": 4.00
+                            "price": 4.00,
+                            "instock": true
                           },
                           {
                             "title": "Carrot cake",
-                            "price": 4.50
+                            "price": 4.50,
+                            "instock": true
                           },
                           {
                             "title": "Coconut pie",
-                            "price": 3.00
+                            "price": 3.00,
+                            "instock": true
                           },
                           {
                             "title": "Crêpes with 2 gelato scoops",
-                            "price": 4.50
+                            "price": 4.50,
+                            "instock": true
                           },
                           {
                             "title": "Hazelnut and chocolate torte",
-                            "price": 4.99
+                            "price": 4.99,
+                            "instock": true
                           },
                           {
                             "title": "Raspberry cheesecake",
-                            "price": 4.00
+                            "price": 4.00,
+                            "instock": true
                           },
                           {
                             "title": "Waffles with 2 gelato scoops",
-                            "price": 3.50
+                            "price": 3.50,
+                            "instock": true
                           }
                         ]
                       },
@@ -358,31 +404,38 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Caffé Americano",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Cappucino",
-                            "price": 3.75
+                            "price": 3.75,
+                            "instock": true
                           },
                           {
                             "title": "Caramel Macchiato",
-                            "price": 2.95
+                            "price": 2.95,
+                            "instock": true
                           },
                           {
                             "title": "Filter Coffee",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Flat white",
-                            "price": 3.00
+                            "price": 3.00,
+                            "instock": true
                           },
                           {
                             "title": "Latte",
-                            "price": 3.00
+                            "price": 3.00,
+                            "instock": true
                           },
                           {
                             "title": "Mocha",
-                            "price": 4.95
+                            "price": 4.95,
+                            "instock": true
                           },
                         ]
                       },
@@ -391,43 +444,53 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Chocolate",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Dulce de leche",
-                            "price": 2.50
+                            "price": 2.50,
+                            "instock": true
                           },
                           {
                             "title": "Hazelnut",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Lemon",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Inimitable",
-                            "price": 2.25
+                            "price": 2.25,
+                            "instock": true
                           },
                           {
                             "title": "Mint",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Sicilian orange",
-                            "price": 2.50
+                            "price": 2.50,
+                            "instock": true
                           },
                           {
                             "title": "Strawberry",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Vanilla",
-                            "price": 2.00
+                            "price": 2.00,
+                            "instock": true
                           },
                           {
                             "title": "Yogurt and cherries",
-                            "price": 2.50
+                            "price": 2.50,
+                            "instock": true
                           }
                         ]
                       }
@@ -450,27 +513,33 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Chicken samosas",
-                            "price": 4.99
+                            "price": 4.99,
+                            "instock": true
                           },
                           {
                             "title": "Lentil bites",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Onion bhajis",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Potato paratha",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Vegetarian pakoras",
-                            "price": 3.99
+                            "price": 3.99,
+                            "instock": true
                           },
                           {
                             "title": "Vegetarian samosas",
-                            "price": 3.99
+                            "price": 3.99,
+                            "instock": true
                           }
                         ]
                       },
@@ -480,72 +549,86 @@ function HomeScreen({ navigation }) {
                           {
                             "title": "Chef's Special Chicken",
                             "subtitle": "Chicken curry with tropical fruits",
-                            "price": 10.99
+                            "price": 10.99,
+                            "instock": true
                           },
                           {
                             "title": "Chicken korma",
                             "subtitle": "Sauce made from cream and ground nuts",
-                            "price": 10.99
+                            "price": 10.99,
+                            "instock": true
                           },
                           {
                             "title": "Chicken tikka masala",
                             "subtitle": "Creamy tomato sauce",
-                            "price": 9.99
+                            "price": 9.99,
+                            "instock": true
                           },
                           {
                             "title": "Chicken jalfrezi",
                             "subtitle": "Pepper and tomato sauce",
-                            "price": 9.99
+                            "price": 9.99,
+                            "instock": true
                           },
                           {
                             "title": "Chicken vindaloo",
                             "subtitle": "Vinegary, very spicy sauce",
-                            "price": 9.99
+                            "price": 9.99,
+                            "instock": true
                           },
                           {
                             "title": "Chickpea chana masala",
                             "subtitle": "Medium-spicy tomato based sauce",
-                            "price": 8.99
+                            "price": 8.99,
+                            "instock": true
                           },
                           {
                             "title": "Fish coconut curry",
                             "subtitle": "Cod in creamy coconut sauce",
-                            "price": 12.99
+                            "price": 12.99,
+                            "instock": true
                           },
                           {
                             "title": "Lamb biryani",
                             "subtitle": "Aromatic rice with succulent lamb",
-                            "price": 12.99
+                            "price": 12.99,
+                            "instock": true
                           },
                           {
                             "title": "Lamb madras",
                             "subtitle": "Rich and aromatic spice blend",
-                            "price": 12.99
+                            "price": 12.99,
+                            "instock": true
                           },
                           {
                             "title": "Lentil dahl",
                             "subtitle": "Spicy mustard and coriander sauce",
-                            "price": 8.99
+                            "price": 8.99,
+                            "instock": true
                           },
                           {
                             "title": "Saag aloo",
                             "subtitle": "Dry spinach curry with potatoes",
-                            "price": 6.99
+                            "price": 6.99,
+                            "instock": true
                           },
                           {
                             "title": "Prawn jalfrezi",
                             "subtitle": "Pepper and tomato sauce",
-                            "price": 12.99
+                            "price": 12.99,
+                            "instock": true
                           },
                           {
                             "title": "Vegetarian balti",
                             "subtitle": "Spicy vegetable stir-fry",
-                            "price": 7.99
+                            "price": 7.99,
+                            "instock": true
                           },
                           {
                             "title": "Vegetarian biryani",
                             "subtitle": "Aromatic rice with cauliflower and peas",
-                            "price": 7.99
+                            "price": 7.99,
+                            "instock": true
                           }
                         ]
                       },
@@ -554,35 +637,43 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Coconut rice",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Pilau rice",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Plain rice",
-                            "price": 1.99
+                            "price": 1.99,
+                            "instock": true
                           },
                           {
                             "title": "Garlic naan bread",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Plain naan bread",
-                            "price": 2.99
+                            "price": 2.99,
+                            "instock": true
                           },
                           {
                             "title": "Cucumber raita",
-                            "price": 1.99
+                            "price": 1.99,
+                            "instock": true
                           },
                           {
                             "title": "Selection of pickles",
-                            "price": 1.00
+                            "price": 1.00,
+                            "instock": true
                           },
                           {
                             "title": "Poppadums",
-                            "price": 1.00
+                            "price": 1.00,
+                            "instock": true
                           },
                         ]
                       },
@@ -591,23 +682,28 @@ function HomeScreen({ navigation }) {
                         "contents": [
                           {
                             "title": "Chai masala",
-                            "price": 2.50
+                            "price": 2.50,
+                            "instock": true
                           },
                           {
                             "title": "Home-made lemonade",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           },
                           {
                             "title": "Salty lassi",
-                            "price": 3.50
+                            "price": 3.50,
+                            "instock": true
                           },
                           {
                             "title": "Mango lassi",
-                            "price": 3.50
+                            "price": 3.50,
+                            "instock": true
                           },
                           {
                             "title": "Sparkling water",
-                            "price": 1.50
+                            "price": 1.50,
+                            "instock": true
                           }
                         ]
                       }
@@ -631,18 +727,25 @@ function MenuScreen({ route, navigation }) {
   const CustomCellWithSubtitleAndRightDetail = (props) => (
     <Cell
       {...props}
+      isDisabled={props.instock? false : true}
       cellContentView={
         <View style={styles.subtitleCellRowView}>
           <View style={styles.subtitleCellTitleAndSubtitle}>
-            <Text>
+            <Text style={props.instock? styles.cellHeaderNormal : styles.cellHeaderDisabled}>
               {props.productTitle}
             </Text>
-            <Text style={styles.menuSubtitleCellSubtitle}>
-              {props.productSubtitle}
-            </Text>
+            {/* Displays 'Out of stock!' instead of detailed product description if the product is out of stock */}
+            { props.instock && props.productSubtitle ? (
+                <Text style={[styles.menuSubtitleCellSubtitle]}>
+                  {props.productSubtitle}
+                </Text>
+            ) : (
+              props.instock? null: <Text style={styles.outOfStockMessage}>Out of stock!</Text>
+            )}
+            
           </View>
           <View style={styles.menuSubtitleCellPriceContainer}>
-            <Text style={styles.menuSubtitleCellPrice}>
+            <Text style={props.instock? styles.menuSubtitleCellPrice : styles.menuSubtitleCellPriceDisabled}>
               £{props.productPrice}
             </Text>
           </View>
@@ -662,7 +765,7 @@ function MenuScreen({ route, navigation }) {
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <TableView>
           {
             // Inside the TableView iterate through "items", creating a new Section each time.
@@ -675,27 +778,16 @@ function MenuScreen({ route, navigation }) {
               >
                 {
                   item.contents.map((product, idx2) => {
-                    if (product.subtitle) {
-                      return (
-                        <CustomCellWithSubtitleAndRightDetail
-                          key={idx2}
-                          productTitle={product.title}
-                          productSubtitle={product.subtitle}
-                          // Makes sure that 0s are displayed after price up to 2 decimal places
-                          productPrice={product.price.toFixed(2)}
-                        />
-                      );
-                    } else {
-                      return (
-                        <Cell
-                          key={idx2}
-                          cellStyle="RightDetail"
-                          title={product.title}
-                          detail={`£${product.price.toFixed(2)}`}
-                          detailTextStyle={styles.menuSubtitleCellPrice}
-                        />
-                      );
-                    }
+                    return (
+                      <CustomCellWithSubtitleAndRightDetail
+                        key={idx2}
+                        productTitle={product.title}
+                        productSubtitle={product.subtitle}
+                        // Makes sure that 0s are displayed after price up to 2 decimal places
+                        productPrice={product.price.toFixed(2)}
+                        instock = {product.instock}
+                      />
+                    );
                   })
                 }
               </Section>
@@ -771,6 +863,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  scrollView: {
+    marginBottom: "18%"
+  },
   restaurantCellContentContainer: {
     // Set height of cell to 290px
     height: 290,
@@ -834,6 +929,13 @@ const styles = StyleSheet.create({
   menuSectionHeaderTextStyle: {
     fontSize: 16
   },
+  cellHeaderNormal : {
+    color: "darkorange",
+    fontSize: 16
+  },
+  cellHeaderDisabled: {
+    color: "lightgrey"
+  },
   subtitleCellRowView: {
     flexDirection: "row",
     // Stretches View across the whole cell!
@@ -841,20 +943,29 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   subtitleCellTitleAndSubtitle: {
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
   },
   menuSubtitleCellSubtitle: {
     fontSize: 12,
     color: "#808080"
   },
+  outOfStockMessage: {
+    fontSize: 12,
+    color: 'darkgrey'
+  },
   // Position the price in the custom-menu cell at the right of the custom cell View
   menuSubtitleCellPriceContainer: {
-    alignSelf: "center",
     position: "absolute",
-    right: 0
+    right: 0,
+    bottom: 0
   },
   menuSubtitleCellPrice: {
     fontSize: 14,
     color: "darkgrey"
+  },
+  menuSubtitleCellPriceDisabled:
+  {
+    fontSize: 14,
+    color: 'lightgrey'
   }
 });
