@@ -18,7 +18,7 @@
 // 
 
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 // Import Navigation libraries
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -61,13 +61,13 @@ function Header({ navigation, screenTitle }) {
       <Text style={styles.headerTextContent}>
         {screenTitle}
       </Text>
-      <View style={styles.cart}>
+      <TouchableOpacity style={styles.cart} onPress={()=> {navigation.navigate("Basket");}}>
         <LogoCart/>
         <Text style={styles.cartText}>£{priceInBasket.toFixed(2)}</Text>
         <TouchableOpacity style={styles.clearButton} onPress={()=>{clearBasket()}}>
           <Text style={styles.clearButtonText}>Clear</Text>
         </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -831,6 +831,69 @@ function MenuScreen({ route, navigation }) {
   )
 }
 
+// Basket Screen
+function BasketScreen({ route, navigation }) {
+  // Pass in the context to globally update the shopping cart on all the screens
+  const { priceInBasket, currentRestaurant, itemsInBasket, addToBasket, clearBasket } = useContext(ShoppingCartContext);
+  return (
+    <View>
+      <View style={styles.backButtonView}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => { navigation.goBack() }}
+        >
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView>
+        { itemsInBasket.length == 0 ? (<Text>Empty!</Text>):(
+          <TableView>
+          <Section
+            header={currentRestaurant}
+            headerTextColor="#ed3507"
+            headerTextStyle={styles.menuSectionHeaderTextStyle}
+          >
+          {
+            itemsInBasket.map((product, idx) => {
+              return (
+                <Cell
+                  key={idx}
+                  title={product.name}
+                  cellStyle='RightDetail'
+                  detail={
+                    <View style={{flexDirection: "row", justifyContent: "flex-end", alignItems: "center", }}>
+                      <Text style={{marginHorizontal: 10}}>{`£${product.price}`}</Text>
+                      {/* cell detail styles only allow abs values not %-values */}
+                      <TouchableOpacity style={{
+                        borderRadius: 10,
+                        borderWidth: 2,
+                        borderColor: "#EC0D00",
+                        paddingVertical: 6,
+                        paddingHorizontal: 20,
+                        marginHorizontal: 10,
+                        backgroundColor: "#FF5349"
+                        }}>
+                        <Text style={{color: "white"}}>Remove</Text>
+                      </TouchableOpacity>
+                    </View>
+                  }
+                  />
+              );})
+            }
+            </Section>
+          <View style={{flex: 1, borderWidth:2 , borderColor: "black", justifyContent:"center", alignItems: "center"}}>
+            <TouchableOpacity style={{backgroundColor:"#bc3e06", paddingVertical:"2%", paddingHorizontal: "4%", borderRadius: 6}}>
+                <Text>Clear Basket</Text>
+            </TouchableOpacity>
+          </View>
+          </TableView>
+        )}
+        
+      </ScrollView>
+    </View>
+  )
+}
+
 const ShoppingCartContext = createContext();
 const Stack = createStackNavigator();
 
@@ -895,6 +958,7 @@ export default function App() {
   const contextValues = {
     priceInBasket,
     currentRestaurant,
+    itemsInBasket,
     addToBasket,
     clearBasket,
   };
@@ -921,6 +985,15 @@ export default function App() {
             ({
               // Header displays logo followed by restaurant name for the menu page
               header: () => <Header navigation={navigation} screenTitle={route.params.restaurantName} priceInBasket={priceInBasket}/>
+            })}
+          />
+          <Stack.Screen
+            name="Basket"
+            component={BasketScreen}
+            options={({ navigation, route }) =>
+            ({
+              // Header displays logo followed by restaurant name for the menu page
+              header: () => <Header navigation={navigation} screenTitle="Shopping Cart" priceInBasket={priceInBasket}/>
             })}
           />
         </Stack.Navigator>
