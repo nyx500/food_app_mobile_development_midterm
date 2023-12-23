@@ -31,12 +31,14 @@ import React, { createContext, useEffect, useState, useContext } from 'react';
 // Replacing the title with a custom component
 // Attribution: https://reactnavigation.org/docs/headers/
 // Color scheme: #ed3507
-function LogoTitle() {
+function LogoTitle({navigation}) {
   return (
+    <TouchableOpacity onPress={()=>{navigation.navigate("Home")}}>
     <Image
-      style={styles.logo}
+      style={styles.logoImage}
       source={require("./images/owl_logo.png")}
     />
+    </TouchableOpacity>
   );
 }
 
@@ -54,7 +56,7 @@ function Header({ navigation, screenTitle }) {
   const { priceInBasket, clearBasket } = useContext(ShoppingCartContext);
   return (
     <View style={styles.headerView}>
-      <LogoTitle />
+        <LogoTitle navigation={navigation} />
       <Text style={styles.headerTextLogo}>
         FoodWol:
       </Text>
@@ -65,12 +67,13 @@ function Header({ navigation, screenTitle }) {
         <LogoCart/>
         <Text style={styles.cartText}>£{priceInBasket.toFixed(2)}</Text>
         <TouchableOpacity style={styles.clearButton} onPress={()=>{clearBasket()}}>
-          <Text style={styles.clearButtonText}>Clear</Text>
+          <Text style={[styles.whiteText, styles.clearButtonText]}>Clear</Text>
         </TouchableOpacity>
       </TouchableOpacity>
     </View>
   )
 }
+
 
 
 // Screens go here
@@ -754,8 +757,9 @@ function MenuScreen({ route, navigation }) {
       onPress={() => {
         // Create item-object storing product name and price to pass into addToBasket
         let item = {
+          "id": itemsInBasket.length,
           "name": props.productTitle,
-          "price": props.productPrice
+          "price": props.productPrice,
         }
         addToBasket(props.productPrice, props.currentRestaurant, item); 
       }}
@@ -793,7 +797,7 @@ function MenuScreen({ route, navigation }) {
           style={styles.backButton}
           onPress={() => { navigation.goBack() }}
         >
-          <Text style={styles.backButtonText}>Back</Text>
+          <Text style={[styles.whiteText, styles.backButtonText]}>Back</Text>
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.scrollViewMenu}>
@@ -834,7 +838,7 @@ function MenuScreen({ route, navigation }) {
 // Basket Screen
 function BasketScreen({ route, navigation }) {
   // Pass in the context to globally update the shopping cart on all the screens
-  const { priceInBasket, currentRestaurant, itemsInBasket, addToBasket, clearBasket } = useContext(ShoppingCartContext);
+  const { priceInBasket, currentRestaurant, itemsInBasket, addToBasket, clearBasket, removeItemFromBasket } = useContext(ShoppingCartContext);
   return (
     <View>
       <View style={styles.backButtonView}>
@@ -842,11 +846,15 @@ function BasketScreen({ route, navigation }) {
           style={styles.backButton}
           onPress={() => { navigation.goBack() }}
         >
-          <Text style={styles.backButtonText}>Back</Text>
+          <Text style={[styles.whiteText, styles.backButtonText]}>Back</Text>
         </TouchableOpacity>
       </View>
       <ScrollView>
-        { itemsInBasket.length == 0 ? (<Text>Empty!</Text>):(
+        { itemsInBasket.length == 0 ? (
+          <View style={styles.emptyCart}>
+            <Text style={styles.emptyCartText}>Your shopping cart is currently empty.</Text>
+          </View>) :
+          (
           <TableView>
           <Section
             header={currentRestaurant}
@@ -861,19 +869,37 @@ function BasketScreen({ route, navigation }) {
                   title={product.name}
                   cellStyle='RightDetail'
                   detail={
-                    <View style={{flexDirection: "row", justifyContent: "flex-end", alignItems: "center", }}>
-                      <Text style={{marginHorizontal: 10}}>{`£${product.price}`}</Text>
+                    <View style={styles.cartDetailBox}>
+                      <Text style={styles.cartDetailBoxPriceText}>{`£${product.price.toFixed(2)}`}</Text>
                       {/* cell detail styles only allow abs values not %-values */}
-                      <TouchableOpacity style={{
-                        borderRadius: 10,
-                        borderWidth: 2,
-                        borderColor: "#EC0D00",
-                        paddingVertical: 6,
-                        paddingHorizontal: 20,
-                        marginHorizontal: 10,
-                        backgroundColor: "#FF5349"
-                        }}>
-                        <Text style={{color: "white"}}>Remove</Text>
+                      <TouchableOpacity 
+                        style={styles.removeItemButton}
+                        onPress={()=>{
+                          Alert.alert(
+                            // Prompt the user to confirm the removal of the item
+                            "Remove item?",
+                            "Press 'OK' to remove the item from your shopping cart and 'Cancel' to dismiss",
+                            [
+                              {
+                                text: "OK",
+                                onPress: () => {
+                                  removeItemFromBasket(product.id, product.price);
+                                }
+                              },
+                              {
+                                text: 'Cancel',
+                                // iOS only
+                                style: 'cancel'
+                              }
+                            ],
+                            // Android only
+                            {
+                              cancelable: true
+                            }
+                          )
+                        }}
+                        >
+                        <Text style={styles.whiteText}>Remove</Text>
                       </TouchableOpacity>
                     </View>
                   }
@@ -881,9 +907,9 @@ function BasketScreen({ route, navigation }) {
               );})
             }
             </Section>
-          <View style={{flex: 1, borderWidth:2 , borderColor: "black", justifyContent:"center", alignItems: "center"}}>
+          <View style={styles.clearButtonAtBottomOfCartContainer}>
             <TouchableOpacity 
-              style={{backgroundColor:"#bc3e06", paddingVertical:"2%", paddingHorizontal: "8%", borderRadius: 6}}
+              style={styles.clearButtonAtBottomOfCart}
               onPress={()=>{
                 Alert.alert(
                   "Are you sure you want to clear the basket?",
@@ -911,7 +937,7 @@ function BasketScreen({ route, navigation }) {
                 )
               }}
             >
-                <Text style={{color: "white"}}>Clear Basket</Text>
+                <Text style={styles.whiteText}>Clear Basket</Text>
             </TouchableOpacity>
           </View>
           </TableView>
@@ -937,6 +963,18 @@ export default function App() {
     setPriceInBasket(0);
     setCurrentRestaurant("");
     setItemsInBasket([]);
+  };
+  
+  const removeItemFromBasket = (id, price) => {
+    // Ref: https://www.w3schools.com/jsref/jsref_filter.asp
+    // Re-creates and updates itemsInBasket array in the context to contain only the items excluding the entered ID
+    setItemsInBasket((previousItems) => previousItems.filter((item) => item.id !== id));
+    setPriceInBasket((prevPrice) => prevPrice - price);
+    // Clear all the restaurant settings etc. if no items left
+    if (itemsInBasket.length === 0)
+    {
+      clearBasket();
+    }
   };
 
   const addToBasket = (amount, current_restaurant, item) => {
@@ -989,6 +1027,7 @@ export default function App() {
     itemsInBasket,
     addToBasket,
     clearBasket,
+    removeItemFromBasket
   };
 
   return (
@@ -1021,7 +1060,7 @@ export default function App() {
             options={({ navigation, route }) =>
             ({
               // Header displays logo followed by restaurant name for the menu page
-              header: () => <Header navigation={navigation} screenTitle="Shopping Cart" priceInBasket={priceInBasket}/>
+              header: () => <Header navigation={navigation} screenTitle="Cart" priceInBasket={priceInBasket}/>
             })}
           />
         </Stack.Navigator>
@@ -1035,12 +1074,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  logo:
+  whiteText: {
+    color: "white"
+  },
+  logoImage:
   {
-    width: "16%",
-    height: "16%",
+    width: 80,
+    height: 80,
     aspectRatio: 1
   },
   headerView: {
@@ -1065,20 +1106,20 @@ const styles = StyleSheet.create({
   },
   cart: {
     position: "absolute",
-    top: "40%",
-    right: "2.5%",
+    top: "20%",
+    right: 0,
     justifyContent: "center",
     alignItems: "center",
     // This lets the logo be sized in % rather than absolute terms. Parent of the logo needs real dimensions for % to be used
     // Using a blue border to highlight this TouchableOpacity's size helps with this
-    width: "17%",
-    height: "100%",
+    width: "24%",
   },
   cartLogo:
   {
-    width: "60%",
-    height: "60%",
-    aspectRatio: 1
+    width: "40%",
+    height: "40%",
+    aspectRatio: 1,
+    
   },
   cartText: {
     fontWeight: "bold",
@@ -1087,26 +1128,24 @@ const styles = StyleSheet.create({
   },
   clearButton: {
     marginLeft: "7%",
-    marginTop: "16%",
-    marginBottom: "5%",
+    marginTop: "12%",
+    marginBottom: "2%",
     backgroundColor: "#bc3e06",
     borderRadius: 8,
     paddingVertical: "8%",
-    paddingHorizontal: "12%"
-  },
-  clearButtonText: {
-    color: "white",
+    paddingHorizontal: "12%",
   },
   scrollViewHome: {
     marginTop: "8%"
   },
   scrollViewMenu: {
-    marginBottom: "18%"
+    marginBottom: "18%",
   },
   restaurantCellContentContainer: {
     // Set height of cell to 290px
     height: 290,
     alignItems: "stretch",
+    
   },
   restaurantCellContentView: {
     // Expands the View in CellContent horizontally to fill whole width of screen
@@ -1160,7 +1199,6 @@ const styles = StyleSheet.create({
     borderWidth: 3, borderColor: "#f95f39"
   },
   backButtonText: {
-    color: "white",
     textDecorationLine: "underline"
   },
   menuSectionHeaderTextStyle: {
@@ -1204,5 +1242,47 @@ const styles = StyleSheet.create({
   {
     fontSize: 14,
     color: 'lightgrey'
+  },
+  // Cart page styling
+  emptyCart: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: "15%"
+  },
+  emptyCartText: {
+    fontWeight: "bold",
+    fontSize: 16
+  },
+  // Right-detail container for Shopping Cart screen cells containing item price and "Remove" button/Touchable Opacity
+  cartDetailBox: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center"
+  },
+  cartDetailBoxPriceText: {
+    // cell detail disallows using %-based responsive margins & padding due to 'availableWidth is indefinite error'!
+    marginHorizontal: 10
+  },
+  removeItemButton: {
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#EC0D00",
+    paddingVertical: 6,
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+    backgroundColor: "#FF5349"
+  },
+  clearButtonAtBottomOfCartContainer: {
+    flex: 1,
+    justifyContent:"center",
+    alignItems: "center"
+  },
+  clearButtonAtBottomOfCart:
+  {
+    backgroundColor:"#bc3e06",
+    paddingVertical:"2%",
+    paddingHorizontal: "8%",
+    borderRadius: 6
   }
 });
