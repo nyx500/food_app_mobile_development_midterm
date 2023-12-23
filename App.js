@@ -24,7 +24,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 // Import TableView components
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
 
 
 // LOGO CUSTOM COMPONENT FOR NAVIGATION HEADER
@@ -741,7 +741,7 @@ function HomeScreen({ navigation }) {
 // Menu Screen: remember to pass in the route containing the "items" data
 function MenuScreen({ route, navigation }) {
 
-  const { priceInBasket, addToBasket, clearBasket } = useContext(ShoppingCartContext);
+  const { priceInBasket, currentRestaurant, itemsInBasket, addToBasket, clearBasket } = useContext(ShoppingCartContext);
 
   // A custom cell component which permits having a subtitle AND a right-detail for the price
   // In react-native-tableview-simple, you are restricted to only having one "detail", which is
@@ -750,8 +750,14 @@ function MenuScreen({ route, navigation }) {
     <Cell
       {...props}
       isDisabled={props.instock? false : true}
+      // Adds the desired amount and the current restaurant to the basket
       onPress={() => {
-        addToBasket(props.productPrice); // Add the desired amount to the basket
+        // Create item-object storing product name and price to pass into addToBasket
+        let item = {
+          "name": props.productTitle,
+          "price": props.productPrice
+        }
+        addToBasket(props.productPrice, props.currentRestaurant, item); 
       }}
       cellContentView={
         <View style={styles.subtitleCellRowView}>
@@ -811,6 +817,7 @@ function MenuScreen({ route, navigation }) {
                         // Makes sure that 0s are displayed after price up to 2 decimal places
                         productPrice={product.price}
                         instock = {product.instock}
+                        currentRestaurant = {route.params.restaurantName}
                       />
                     );
                   })
@@ -829,17 +836,34 @@ const Stack = createStackNavigator();
 
 export default function App() {
 
+  // Stores the total price of items in the shopping cart and uses React context hooks to display this on every screen
   const [priceInBasket, setPriceInBasket] = useState(0);
-  const addToBasket = (amount) => {
+  const [itemsInBasket, setItemsInBasket] = useState([]);
+  // This variable stores which restaurant is being ordered from currently
+  const [currentRestaurant, setCurrentRestaurant] = useState("");
+
+  const addToBasket = (amount, current_restaurant, item) => {
     setPriceInBasket((prevPrice) => prevPrice + amount);
+    setCurrentRestaurant(()=> current_restaurant);
+    setItemsInBasket((prevItems) => [...prevItems, item]);
   };
+
+  // Print out console message after item added to basket!
+  useEffect(() => {
+    console.log(currentRestaurant);
+    console.log(itemsInBasket);
+  }, [currentRestaurant, itemsInBasket]);
+
   const clearBasket = () => {
     setPriceInBasket(0);
+    setCurrentRestaurant("");
+    setItemsInBasket([]);
   };
   const contextValues = {
     priceInBasket,
+    currentRestaurant,
     addToBasket,
-    clearBasket
+    clearBasket,
   };
 
   return (
