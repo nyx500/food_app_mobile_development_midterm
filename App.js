@@ -853,8 +853,10 @@ export default function App() {
     {
       Alert.alert(
         "New restaurant selected!", // title
-        "Do you want to clear basket and add this new item?", // subtitle
+        "Click OK to clear basket and add item from new restaurant", // subtitle
+        // Alert buttons array
         [
+          // Press OK to clear the basket and to add the item from the new restaurant into the basket
           {
             text: "OK",
             onPress: () => {
@@ -864,13 +866,14 @@ export default function App() {
               setItemsInBasket((prevItems) => [...prevItems, item]);
             }
           },
+          // Press Cancel to do nothing and to keep the items from old restaurant in the shopping cart
           {
             text: 'Cancel',
             // iOS only
             style: 'cancel'
           }
         ],
-        // Android only
+        // Android only: allow canceling by clicking outside the alert
         {
           cancelable: true
         }
