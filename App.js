@@ -11,11 +11,9 @@
 // COLLECTION: Special Days Icooon Mono Vectors
 // LICENSE: PD License
 // AUTHOR: Icooon Mono
-// Salad: Photo by <a href="https://unsplash.com/@annapelzer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Anna Pelzer</a> on <a href="https://unsplash.com/photos/bowl-of-vegetable-salads-IGfIGP5ONV0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 // Shopping cart: <a href="https://www.flaticon.com/free-icons/smart-cart" title="smart cart icons">Smart cart icons created by Freepik - Flaticon</a>
 // React useContext tutorials: https://www.w3schools.com/react/react_usecontext.asp, https://dmitripavlutin.com/react-context-and-usecontext/
-
-// 
+// Bin logo: <div> Icons made by <a href="https://www.flaticon.com/authors/lakonicon" title="lakonicon"> lakonicon </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
 
 import { StatusBar } from 'expo-status-bar';
 import { Alert, Button, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -63,13 +61,18 @@ function Header({ navigation, screenTitle }) {
       <Text style={styles.headerTextContent}>
         {screenTitle}
       </Text>
-      <TouchableOpacity style={styles.cart} onPress={()=> {navigation.navigate("Basket");}}>
-        <LogoCart/>
+      <View style={styles.cart} >
+        <TouchableOpacity 
+          style={styles.cartLogoContainer}
+          onPress={()=> {navigation.navigate("Basket");}}
+        >
+          <LogoCart/>
+        </TouchableOpacity>
         <Text style={styles.cartText}>£{priceInBasket.toFixed(2)}</Text>
         <TouchableOpacity style={styles.clearButton} onPress={()=>{clearBasket()}}>
           <Text style={[styles.whiteText, styles.clearButtonText]}>Clear</Text>
         </TouchableOpacity>
-      </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -257,7 +260,7 @@ function HomeScreen({ navigation }) {
                             "instock": true
                           },
                           {
-                            "title": "Coconut and passion fruit sticky rice",
+                            "title": "Coconut sticky rice",
                             "price": 6.25,
                             "instock": true
                           },
@@ -272,7 +275,7 @@ function HomeScreen({ navigation }) {
                             "instock": true
                           },
                           {
-                            "title": "Vegan chocolate fondant with sticky fudge",
+                            "title": "Vegan chocolate fondant",
                             "price": 4.50,
                             "instock": true
                           }
@@ -868,6 +871,7 @@ function BasketScreen({ route, navigation }) {
                   key={idx}
                   title={product.name}
                   cellStyle='RightDetail'
+                  style={{flexWrap: "wrap"}}
                   detail={
                     <View style={styles.cartDetailBox}>
                       <Text style={styles.cartDetailBoxPriceText}>{`£${product.price.toFixed(2)}`}</Text>
@@ -899,7 +903,7 @@ function BasketScreen({ route, navigation }) {
                           )
                         }}
                         >
-                        <Text style={styles.whiteText}>Remove</Text>
+                        <Image style={styles.binLogo} source={require('./images/bin.png')}/>
                       </TouchableOpacity>
                     </View>
                   }
@@ -1106,18 +1110,22 @@ const styles = StyleSheet.create({
   },
   cart: {
     position: "absolute",
-    top: "20%",
+    top: "10%",
     right: 0,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     // This lets the logo be sized in % rather than absolute terms. Parent of the logo needs real dimensions for % to be used
     // Using a blue border to highlight this TouchableOpacity's size helps with this
-    width: "24%",
+    width: "26%",
+  },
+  cartLogoContainer:
+  {
+    marginBottom: "-20%"
   },
   cartLogo:
   {
-    width: "40%",
-    height: "40%",
+    width: "60%",
+    height: "60%",
     aspectRatio: 1,
     
   },
@@ -1128,7 +1136,7 @@ const styles = StyleSheet.create({
   },
   clearButton: {
     marginLeft: "7%",
-    marginTop: "12%",
+    marginTop: "8%",
     marginBottom: "2%",
     backgroundColor: "#bc3e06",
     borderRadius: 8,
@@ -1265,13 +1273,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 10
   },
   removeItemButton: {
-    borderRadius: 10,
+    borderRadius: 4,
     borderWidth: 2,
     borderColor: "#EC0D00",
-    paddingVertical: 6,
-    paddingHorizontal: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 4,
     marginHorizontal: 10,
     backgroundColor: "#FF5349"
+  },
+  binLogo: {
+    width:25,
+    height: 25
   },
   clearButtonAtBottomOfCartContainer: {
     flex: 1,
