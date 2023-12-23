@@ -882,8 +882,36 @@ function BasketScreen({ route, navigation }) {
             }
             </Section>
           <View style={{flex: 1, borderWidth:2 , borderColor: "black", justifyContent:"center", alignItems: "center"}}>
-            <TouchableOpacity style={{backgroundColor:"#bc3e06", paddingVertical:"2%", paddingHorizontal: "4%", borderRadius: 6}}>
-                <Text>Clear Basket</Text>
+            <TouchableOpacity 
+              style={{backgroundColor:"#bc3e06", paddingVertical:"2%", paddingHorizontal: "8%", borderRadius: 6}}
+              onPress={()=>{
+                Alert.alert(
+                  "Are you sure you want to clear the basket?",
+                  "Press 'OK' to clear and 'Cancel' to dismiss",
+                  [
+                      // Press OK to clear the basket and to add the item from the new restaurant into the basket
+                      {
+                        text: "OK",
+                        onPress: () => {
+                          clearBasket();
+                          console.log("Cleared");
+                        }
+                      },
+                      // Press Cancel to do nothing and to keep the items from old restaurant in the shopping cart
+                      {
+                        text: 'Cancel',
+                        // iOS only
+                        style: 'cancel'
+                      }
+                    ],
+                    // Android only: allow canceling by clicking outside the alert
+                    {
+                      cancelable: true
+                    }
+                )
+              }}
+            >
+                <Text style={{color: "white"}}>Clear Basket</Text>
             </TouchableOpacity>
           </View>
           </TableView>
