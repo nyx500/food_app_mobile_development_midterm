@@ -18,7 +18,7 @@
 // 
 
 import { StatusBar } from 'expo-status-bar';
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 // Import Navigation libraries
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -842,10 +842,45 @@ export default function App() {
   // This variable stores which restaurant is being ordered from currently
   const [currentRestaurant, setCurrentRestaurant] = useState("");
 
+  const clearBasket = () => {
+    setPriceInBasket(0);
+    setCurrentRestaurant("");
+    setItemsInBasket([]);
+  };
+
   const addToBasket = (amount, current_restaurant, item) => {
-    setPriceInBasket((prevPrice) => prevPrice + amount);
-    setCurrentRestaurant(()=> current_restaurant);
-    setItemsInBasket((prevItems) => [...prevItems, item]);
+    if (currentRestaurant.length != 0 && current_restaurant != currentRestaurant)
+    {
+      Alert.alert(
+        "New restaurant selected!", // title
+        "Do you want to clear basket and add this new item?", // subtitle
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              clearBasket();
+              setPriceInBasket((prevPrice) => prevPrice + amount);
+              setCurrentRestaurant(()=> current_restaurant);
+              setItemsInBasket((prevItems) => [...prevItems, item]);
+            }
+          },
+          {
+            text: 'Cancel',
+            // iOS only
+            style: 'cancel'
+          }
+        ],
+        // Android only
+        {
+          cancelable: true
+        }
+      );
+    } else {
+      setPriceInBasket((prevPrice) => prevPrice + amount);
+      setCurrentRestaurant(()=> current_restaurant);
+      setItemsInBasket((prevItems) => [...prevItems, item]);
+    }
+    
   };
 
   // Print out console message after item added to basket!
@@ -854,11 +889,6 @@ export default function App() {
     console.log(itemsInBasket);
   }, [currentRestaurant, itemsInBasket]);
 
-  const clearBasket = () => {
-    setPriceInBasket(0);
-    setCurrentRestaurant("");
-    setItemsInBasket([]);
-  };
   const contextValues = {
     priceInBasket,
     currentRestaurant,
